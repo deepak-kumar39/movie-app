@@ -22,13 +22,21 @@ const MovieList = () => {
 
   return (
     <div className="movie-list">
-      {movies.map((movie, index) => {
-        if (movies.length === index + 1) {
-          return <div ref={lastMovieElementRef} key={movie.id}><MovieCard movie={movie} /></div>;
-        } else {
-          return <MovieCard movie={movie} />;
-        }
-      })}
+      {movies.length === 0 ? (
+    <p className="no-movies">No movies available at the moment. Please check back later!</p>
+  ) : (
+    movies.map((movie, index) => {
+      if (movies.length === index + 1) {
+        return (
+          <div ref={lastMovieElementRef} key={movie.id}>
+            <MovieCard movie={movie} />
+          </div>
+        );
+      } else {
+        return <MovieCard movie={movie} key={movie.id} />;
+      }
+    })
+  )}
       {loading && <Spinner/>}
     </div>
   );
